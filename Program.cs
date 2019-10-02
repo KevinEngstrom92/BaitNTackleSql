@@ -35,6 +35,7 @@ namespace BaitNTackleSQL
                 {
                     case ConsoleKey.D1:
                         Console.Clear();
+
                         Console.Write("Name: ");
                         string name = Console.ReadLine();
                         Console.WriteLine("Price: ");
@@ -58,7 +59,7 @@ namespace BaitNTackleSQL
 
                         foreach(var prod in prodList)
                         {
-                            Console.WriteLine($"{prod.Name}\t\t{prod.Price}");
+                            Console.WriteLine($"{prod.id}. {prod.Name}\t\t{prod.Price}");
                         }
                         Console.ReadKey(true);
                         break;
@@ -130,18 +131,18 @@ namespace BaitNTackleSQL
             SqlCommand sql = new SqlCommand("SELECT * FROM Product", globalConnection);
             SqlDataReader dataReader = sql.ExecuteReader();
 
-            while (dataReader.Read())
-            {
+            
                 foreach(var data in dataReader)
                 {
+                    int id = int.Parse(dataReader["Id"].ToString());
                     string name = dataReader["Title"].ToString();
                     int price = int.Parse(dataReader["Price"].ToString());
-
+                    
                     Product prod = new Product(name, price);
-
+                    prod.id = id;
                     prodList.Add(prod);
                 }
-            }
+            
             dataReader.Close();
             return prodList;
         }
