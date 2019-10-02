@@ -1,7 +1,7 @@
-#BaitNTackle
+# BaitNTackle
 a superneat little Sql app.
 
-##Installation
+## Installation
 clone the repository, fire up your SSMS and Query:
 
 CREATE TABLE Product(
